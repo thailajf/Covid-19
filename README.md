@@ -1,8 +1,8 @@
 
+----
 
 <video width="320" height="240" controls>
-  <source src="https://raw.githubusercontent.com/thailajf/Covid-19/master/images-videos/home.webm">
- 
+  <source src="https://raw.githubusercontent.com/thailajf/Covid-19/master/images-videos/home.webm" type="video/webm">
 </video>
 
 
