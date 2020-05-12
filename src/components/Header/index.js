@@ -10,6 +10,9 @@ export default function Header (){
           <MenuList>
             <Option>
             <Link to="/"> Home </Link>
+            <Link to="/data"> Dados </Link>
+            <Link to="/about"> Sobre </Link>
+
             </Option>
           </MenuList>
         </Menu>

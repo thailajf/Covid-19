@@ -1,21 +1,26 @@
 import React from 'react'
 
- const Pagination = ({countriesDataPerPage,totalCountries,paginate}) => {
-  const pageNumbers=[];
+import {PaginationContainer,PageNumbersList,Container} from './style';
+import styled from 'styled-components';
+
+ const Pagination = ({numberChangedPage,currentPage,paginate,numberClicked}) => {
+
+   const pageNumbers=[];
  
-  for(let i=1;i<=Math.ceil(totalCountries/countriesDataPerPage);i++){
+  for(let i=numberChangedPage-5;i<=numberChangedPage+5;i++){
     pageNumbers.push(i);
+   
   }
   return (
-    <>
-      <ul>
+    <Container>
+      <PaginationContainer>
         {pageNumbers.map(number=>(
-          <li key={number}>
-            <button href="!#" onClick={()=>{paginate(number)}}>{number}ola</button>
-          </li>
+          <PageNumbersList key={number}>
+            <button  href="!#" onClick={()=>paginate(number)}>{number}</button>
+          </PageNumbersList>
         ))}
-      </ul>
-    </>
+      </PaginationContainer>
+    </Container>
   )
 }
 

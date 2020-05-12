@@ -33,8 +33,9 @@ list-style-type: none!important;
 Link,a{
   text-decoration: none;
   color: #223439;
-  font-size: 20px;
+  font-size: 18px;
   font-style: none;
   cusor:pointer;
+  margin-left:20px;
 }
 `

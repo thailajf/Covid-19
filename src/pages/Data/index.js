@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 
-import {Container,PageName,Name,WorldNumber,WorldInfoContainer,WorldContainter,WorldTitle,ListContainer,ListInfoContainer,ListInfo,LabelList,Info,LabelListContainer,StateContainer} from './styles';
-import Api from '../../services/api.js';
+import {Container,PageName,Name,WorldNumber,WorldInfoContainer,WorldContainter,WorldTitle,ListInfoContainer,ListInfo,LabelList,LabelListContainer,StateContainer} from './styles';
+import{CoronaMonitor as Api} from '../../services/api.js';
 import Pagination from'../../components/Pagination/index.js';
+import BrazilData from '../../components/BrazilData';
+import ContriesData from '../../components/CountriesData';
 
-
-export default class Dados extends Component {
+export default class Data extends Component {
 
   state = {
     worldData: [],
@@ -13,15 +14,15 @@ export default class Dados extends Component {
     countriesData:[],
     loading:[],
     currentPage:1,
-    countriesDataPerPage:5
+    countriesDataPerPage:5,
+    numberChangedPage:6,
+    BrazilData:[]
+    
     
   };
 
   componentDidMount() {
-    // const repositories = localStorage.getItem('repositories');
-
-    // if (repositories) {
-    //  }
+   
     this.handleCountries();
     this.handleWorld();
 
@@ -29,14 +30,9 @@ export default class Dados extends Component {
   componentDidUpdate(_, prevState) {
      const { currentPage } = this.state;
 
-    // if (prevState.repositories !== repositories) {
-    //   localStorage.setItem('repositories', JSON.stringify(repositories));
-    // }
+    
      if(prevState.currentPage===currentPage){
-          //  this.handlecurrentPage();
           console.log(currentPage+' -- '+prevState.currentList)
-          
-
      }
 
   }
@@ -52,14 +48,20 @@ export default class Dados extends Component {
      
  })
  
+ 
  const data= await response.data.countries_stat;
   this.setState({listData:data});
-  console.log(this.state.listData)
+  this.setState({BrazilData:data[8]})
+  console.log(this.state.BrazilData)
 
   this.handleCurrentPage();
 
 
   };
+
+  
+  
+
 
   handleCurrentPage = ()=>{
       //current List
@@ -92,33 +94,26 @@ export default class Dados extends Component {
  
    };
 
-   handleList =e=>{
-    {this.state.countriesData.map((item,i)=>{
-                 
-      return (
-        <>
-      <Info>{item.country_name}</Info>
-       <Info>{item.cases}</Info>
-       <Info>{item.total_recovered}</Info>
-       <Info>{item.serious_critical}</Info>
-       <Info>{item.deaths}</Info>
-       </>
-       )
-
-
-       })}
-   }
+  
+   
    //change page
    paginate =async (pageNumber)=>{
     await this.setState({currentPage:pageNumber})
-     console.log(this.state.currentPage)
-     this.handleCurrentPage();
+     
+     if(pageNumber>=6){
+        this.setState({numberChangedPage:pageNumber})      
+
+     }
+     else{
+      this.setState({numberChangedPage:6})
+     }
+      this.handleCurrentPage();
 
    }
  
 
   render() {
-    const {worldData,listData,countriesDataPerPage}=this.state;
+    const {worldData,listData,numberChangedPage,currentPage}=this.state;
  
     return (
       <>
@@ -159,24 +154,17 @@ export default class Dados extends Component {
             <LabelList>Mortes</LabelList>
 
             </LabelListContainer>
-            {this.state.countriesData.map((item,i)=>{
-                 
-                 return (
-                  <ListContainer>
-                  <Info>{item.country_name}</Info>
-                  <Info>{item.cases}</Info>
-                  <Info>{item.total_recovered}</Info>
-                  <Info>{item.serious_critical}</Info>
-                  <Info>{item.deaths}</Info>
-                  </ListContainer>
+            {this.state.countriesData.map((item,i)=>{  
+                return (
+                    <ContriesData country_name={item.country_name} cases={item.cases} total_recovered={item.total_recovered} serious_critical={item.serious_critical} deaths={item.deaths} />
                   )
-           
-           
-                  })}
+                })
+            }
 
-                  <Pagination countriesDataPerPage={countriesDataPerPage} totalCountries={listData.length}paginate={this.paginate}/>
+                  <Pagination numberChangedPage={numberChangedPage} currentPage={currentPage} paginate={this.paginate}/>
           </ListInfo>
           <StateContainer>
+            <BrazilData country_name={this.state.BrazilData.country_name} cases={this.state.BrazilData.cases} total_recovered={this.state.BrazilData.total_recovered} serious_critical={this.state.BrazilData.serious_critical} deaths={this.state.BrazilData.deaths} />
             </StateContainer>
         </ListInfoContainer>
       </Container>
