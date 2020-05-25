@@ -1,6 +1,6 @@
 
 ----
-<img src="" alt="Pagina Inicial">
+<img src="https://github.com/thailajf/Covid-19/blob/master/images-videos/home.gif?raw=true" alt="Pagina Inicial">
 
 
 <img src="" alt="Pagina Dados">
