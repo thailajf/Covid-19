@@ -6,10 +6,10 @@ import styled from 'styled-components';
  const Pagination = ({numberChangedPage,currentPage,paginate,numberClicked}) => {
 
    const pageNumbers=[];
- 
+
   for(let i=numberChangedPage-5;i<=numberChangedPage+5;i++){
     pageNumbers.push(i);
-   
+
   }
   return (
     <Container>

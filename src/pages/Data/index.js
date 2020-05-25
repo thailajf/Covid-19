@@ -41,7 +41,7 @@ export default class Data extends Component {
 
  const data= await response.data.countries_stat;
   this.setState({listData:data});
-  this.setState({BrazilData:data[8]})
+  this.setState({BrazilData:data[1]})
   this.handleCurrentPage();
 
   };
@@ -53,7 +53,10 @@ export default class Data extends Component {
 
   var indexOfFirstCountryData=(indexOfLastCountryData-countriesDataPerPage) ;
   if(currentPage===1){
-    indexOfFirstCountryData=indexOfFirstCountryData+1;
+    // indexOfFirstCountryData=indexOfFirstCountryData+1; (removed)
+
+    indexOfFirstCountryData=indexOfFirstCountryData;
+
   }
   const currentList = listData.slice(indexOfFirstCountryData,indexOfLastCountryData)
   this.setState({countriesData:currentList});
@@ -67,6 +70,7 @@ export default class Data extends Component {
       }
    })
     const data= await response.data;
+    console.log(data)
     this.setState({worldData:data});
    };
 
@@ -99,7 +103,7 @@ export default class Data extends Component {
         <WorldInfoContainer>
           <WorldContainter>
             <WorldTitle>Confirmados</WorldTitle>
-            <WorldNumber>{worldData.cases}</WorldNumber>
+            <WorldNumber>{worldData.total_cases}</WorldNumber>
            </WorldContainter>
           <WorldContainter>
             <WorldTitle>Recuperados</WorldTitle>
