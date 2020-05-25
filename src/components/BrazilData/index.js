@@ -5,12 +5,11 @@ export default function BrazilData({country_name,cases,total_recovered,serious_c
   return (
     <div>
       <Container>
-      <InfoContainer> <h2>Brazil</h2></InfoContainer>
+        <InfoContainer> <h2>Brasil</h2></InfoContainer>
         <InfoContainer>Casos Suspeitos <Info>{cases}</Info> </InfoContainer>
         <InfoContainer>Recuperados <Info>{total_recovered}</Info> </InfoContainer>
         <InfoContainer>Casos Críticos <Info>{serious_critical}</Info> </InfoContainer>
         <InfoContainer>Mortes <Info>{deaths}</Info> </InfoContainer>
-        
       </Container>
     </div>
   )

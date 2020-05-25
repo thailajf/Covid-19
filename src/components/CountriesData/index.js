@@ -5,11 +5,11 @@ export default function ContriesData({country_name,cases,total_recovered,serious
   return (
     <div>
        <ListContainer>
-       <Info>{country_name}</Info>
-                  <Info>{cases}</Info>
-                  <Info>{total_recovered}</Info>
+          <Info>{country_name}</Info>
+          <Info>{cases}</Info>
+          <Info>{total_recovered}</Info>
           <Info>{serious_critical}</Info>
-        <Info>{deaths}</Info>
+          <Info>{deaths}</Info>
         </ListContainer>
     </div>
   )
